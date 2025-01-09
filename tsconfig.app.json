@@ -20,7 +20,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Allow JS/JSX files */
+    "allowJs": true,      // Allow JavaScript files in the project
+    "checkJs": false      // Disable type checking on JS files (optional)
   },
   "include": ["src"]
 }
