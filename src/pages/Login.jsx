@@ -7,90 +7,57 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login } = useContext(AuthContext); // Use login function from context
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await api.post('api/token/', { username, password });
-      login(response.data.token); // Call login function
+      login(response.data.token);
       setError('');
-      navigate('/booking'); // Redirect to booking page
+      navigate('/booking');
     } catch (err) {
       setError('Invalid credentials');
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-      {error && <p>{error}</p>}
+    <div className="flex justify-center items-center min-h-screen bg-blue-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96">
+        <h2 className="text-3xl font-bold text-center text-blue-900 mb-6">Login to Your Account</h2>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div>
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full p-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          {error && 
+            <p className="text-red-600 text-sm text-center mt-2">{error}</p>
+          }
+          <button 
+            type="submit"
+            className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default Login;
-
-
-// import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom'; // Import useNavigate
-// import api from '../services/api';
-
-// const Login = ({ setAuthToken }) => {
-//   const [username, setUsername] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [error, setError] = useState('');
-//   const navigate = useNavigate(); // Initialize navigate hook
-
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const response = await api.post('api/token/', { username, password });
-//       setAuthToken(response.data.token); // Save token to parent state
-//       setError('');
-//       navigate('/booking'); // Redirect to booking page
-//     } catch (err) {
-//       setError('Invalid credentials');
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h2>Login</h2>
-//       <form onSubmit={handleLogin}>
-//         <input
-//           type="text"
-//           placeholder="Username"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//         <input
-//           type="password"
-//           placeholder="Password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//         <button type="submit">Login</button>
-//       </form>
-//       {error && <p>{error}</p>}
-//     </div>
-//   );
-// };
-
-// export default Login;
