@@ -17,6 +17,7 @@ const ContactForm = () => {
 
   return (
     <section className="contact-form-section" style={{ padding: "50px 20px", backgroundColor: "#f8f9fa" }}>
+      <div>
       <h2>Contact Us</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -49,6 +50,7 @@ const ContactForm = () => {
           Submit
         </button>
       </form>
+      </div>
     </section>
   );
 };
